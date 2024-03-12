@@ -1,39 +1,45 @@
 
-describe('Module 2-15: Sửa lần soát xét của phiên bản hiệu lực', () => {
+describe('Module 2-19: Tạo quy trình mới (không trùng mã quy trình)', () => {
     before(()=>{
-        module1_4();
+        module1_3();
     })
 
     after(()=>{
         browser.closeWindow();
     })
 
-    //Sửa lần soát xét của phiên bản hiệu lực
-    let fileRevisionActiveURL = process.env.URL_QLPBHLQT;
-    let btnEdit ='[title="Sửa phiên bản"]';
-    let inputRevisionNumber = '[name="revisionNumber"]';
-    let btnSave ='[class="btn btn-primary"]';;
-  
-    it('Sửa lần soát xét của phiên bản hiệu lực thành công', () =>{
+    //Tạo quy trình mới (không trùng mã quy trình)
+    let categoryURL = process.env.URL_QLQTTM;
+    let btnAdd ='[title="Thêm mới quy trình"]';
+    let inputCategoryID = '[placeholder="Nhập mã quy trình"]';
+    let inputCategoryName = '[placeholder="Nhập tên quy trình"]';
+    let btnSave = '[class="btn btn-primary"]';
+    
+    it('Tạo quy trình mới (không trùng mã quy trình) thành công', () =>{
 
-        browser.url(fileRevisionActiveURL);
-        $(btnEdit).click();
-        
-          //Nhập input số lần soát xét 
-          $(inputRevisionNumber).waitForDisplayed(5000);
-          $(inputRevisionNumber).setValue('20');
-          browser.pause(2000);
+        browser.url(categoryURL);
+        $(btnAdd).click();
 
-          $(btnSave).click();
+        //Nhập input mã quy trình 
+        $(inputCategoryID).waitForDisplayed(5000);
+        $(inputCategoryID).setValue('Test-1');
+        browser.pause(2000);
 
-        //Expect output: chắc chắn hiển thị sửa thành công 
+        //Nhập input tên quy trình 
+        $(inputCategoryName).waitForDisplayed(5000);
+        $(inputCategoryName).setValue('Tên quy trình 1');
+        browser.pause(2000);
+
+        $(btnSave).click();
+
+        //Expect output: chắc chắn hiển thị thêm thành công 
        let toast = '[class="Toastify__toast Toastify__toast-theme--light Toastify__toast--success"]';
        expect(toast).toBeDisplayed(true);
     })
 
 });
 
-function module1_4(){
+function module1_3(){
     let pageurl = process.env.URL_LOGIN;
     let Loginbtn = '[class="btn btn-primary"]';
     let inputusename = '[type="text"]';
@@ -69,17 +75,6 @@ function module1_4(){
         $(Botton).click();
 
         browser.pause(5000)
-    })
-    
-    let LinkPage1 = process.env.URL_QLQTTM;
-    let OptiomClick = '[data-id="HT - QT - 02"]'
-    it('Điều hướng đến "Quản lý phiên bản hiệu lực"', () =>{
-
-        browser.url(LinkPage1);
-
-        $(OptiomClick).waitForDisplayed(5000);
-        $(OptiomClick).selectByVisibleText('Tài liệu hiệu lực');
-        browser.pause(3000);
     })
 
     

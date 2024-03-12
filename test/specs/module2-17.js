@@ -1,5 +1,5 @@
 
-describe('Module 2-15: Sửa lần soát xét của phiên bản hiệu lực', () => {
+describe('Module 2-17: Sửa ngày hiệu lực của phiên bản hiệu lực', () => {
     before(()=>{
         module1_4();
     })
@@ -8,23 +8,42 @@ describe('Module 2-15: Sửa lần soát xét của phiên bản hiệu lực', 
         browser.closeWindow();
     })
 
-    //Sửa lần soát xét của phiên bản hiệu lực
+    //Sửa ngày hiệu lực của phiên bản hiệu lực
     let fileRevisionActiveURL = process.env.URL_QLPBHLQT;
     let btnEdit ='[title="Sửa phiên bản"]';
-    let inputRevisionNumber = '[name="revisionNumber"]';
-    let btnSave ='[class="btn btn-primary"]';;
+    let inputNote = '[name="note"]';
+    let btnSave ='[class="btn btn-primary"]';
+    let clickIconDate = '[data-testid="CalendarIcon"]';   
+    let btnYearView = '[aria-label="calendar view is open, switch to year view"]';
+    let selectYear =  '[role="radio"]';
+    let selectDay =  '[role="gridcell"]';
+    let selectNextMonth = '[aria-label="Next month"]';
   
-    it('Sửa lần soát xét của phiên bản hiệu lực thành công', () =>{
+    it('Sửa ngày hiệu lực của phiên bản hiệu lực thành công', () =>{
 
         browser.url(fileRevisionActiveURL);
         $(btnEdit).click();
         
-          //Nhập input số lần soát xét 
-          $(inputRevisionNumber).waitForDisplayed(5000);
-          $(inputRevisionNumber).setValue('20');
-          browser.pause(2000);
+        $(clickIconDate).waitForDisplayed(5000);
+        $(clickIconDate).click();
+        browser.pause(2000);
 
-          $(btnSave).click();
+        //Mở year view
+        $(btnYearView).click();
+        //Chọn year 
+        $(selectYear).click();
+        //Đóng year view
+        $(btnYearView).click();
+
+        //Chọn month 
+        $(selectNextMonth).click();
+
+        //Chọn ngày 
+        $(selectDay).click();
+
+        $(btnSave).waitForDisplayed(3000);
+        $(btnSave).click();
+        browser.pause(3000);
 
         //Expect output: chắc chắn hiển thị sửa thành công 
        let toast = '[class="Toastify__toast Toastify__toast-theme--light Toastify__toast--success"]';

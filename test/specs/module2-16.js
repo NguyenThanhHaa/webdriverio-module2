@@ -1,5 +1,5 @@
 
-describe('Module 2-15: Sửa lần soát xét của phiên bản hiệu lực', () => {
+describe('Module 2-16: Sửa Note của phiên bản hiệu lực', () => {
     before(()=>{
         module1_4();
     })
@@ -8,20 +8,20 @@ describe('Module 2-15: Sửa lần soát xét của phiên bản hiệu lực', 
         browser.closeWindow();
     })
 
-    //Sửa lần soát xét của phiên bản hiệu lực
+    //Sửa Note của phiên bản hiệu lực
     let fileRevisionActiveURL = process.env.URL_QLPBHLQT;
     let btnEdit ='[title="Sửa phiên bản"]';
-    let inputRevisionNumber = '[name="revisionNumber"]';
-    let btnSave ='[class="btn btn-primary"]';;
+    let inputNote = '[name="note"]';
+    let btnSave ='[class="btn btn-primary"]';
   
-    it('Sửa lần soát xét của phiên bản hiệu lực thành công', () =>{
+    it('Sửa Note của phiên bản hiệu lực thành công', () =>{
 
         browser.url(fileRevisionActiveURL);
         $(btnEdit).click();
         
-          //Nhập input số lần soát xét 
-          $(inputRevisionNumber).waitForDisplayed(5000);
-          $(inputRevisionNumber).setValue('20');
+          //Nhập input note 
+          $(inputNote).waitForDisplayed(5000);
+          $(inputNote).setValue('20');
           browser.pause(2000);
 
           $(btnSave).click();

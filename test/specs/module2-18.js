@@ -1,5 +1,5 @@
 
-describe('Module 2-11: Thêm phiên bản hết hiệu lực cho quy trình ', () => {
+describe('Module 2-18: Xóa phiên bản hết hiệu lực', () => {
     before(()=>{
         module1_6();
     })
@@ -8,34 +8,20 @@ describe('Module 2-11: Thêm phiên bản hết hiệu lực cho quy trình ', (
         browser.closeWindow();
     })
 
-    //Thêm phiên bản hết hiệu lực cho quy trình
-    let fileRevisionInActiveURL = process.env.URL_QLTLHHL;
-    let btnAdd = '[title="Thêm mới phiên bản có hiệu lực"]';
-    let inputRevision = '[name="revisionNumber"]';
-    let inputNote =  '[name="note"]';
-    let btnSave = '[class="btn btn-primary"]';
-  
-    it('Thêm phiên bản hết hiệu lực cho quy trình thành công', () =>{
+    //Xóa phiên bản hết hiệu lực
+    let fileRevisionInActiveURL = process.env.URL_QLPBHLQT;
+    let btnDelete ='[title="Xóa phiên bản"]';
+    let btnConfirm = '[class="btn btn-primary"]';
+    
+    it('Xóa phiên bản hết hiệu lực thành công', () =>{
 
         browser.url(fileRevisionInActiveURL);
-        $(btnAdd).click();
+        $(btnDelete).click();
 
-        //Nhập input lần soát xét
-        $(inputRevision).waitForDisplayed(5000);
-        $(inputRevision).setValue('2');
-        browser.pause(2000);
+        $(btnConfirm).waitForDisplayed(5000);
+        $(btnConfirm).click();
 
-        //Nhập input note 
-        $(inputNote).waitForDisplayed(5000);
-        $(inputNote).setValue('note hết hiệu lực test 1');
-        browser.pause(2000);
-
-        //Nhấn button save 
-        $(btnSave).waitForDisplayed(5000);
-        $(btnSave).click();
-        browser.pause(2000);
-
-       //Expect output: chắc chắn hiển thị thông báo thêm thành công 
+        //Expect output: chắc chắn hiển thị xóa  thành công 
        let toast = '[class="Toastify__toast Toastify__toast-theme--light Toastify__toast--success"]';
        expect(toast).toBeDisplayed(true);
     })

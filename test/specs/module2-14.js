@@ -1,5 +1,4 @@
-
-describe('Module 2-11: Thêm phiên bản hết hiệu lực cho quy trình ', () => {
+describe('Module 2-14: Nhân bản phiên bản hiện hành', () => {
     before(()=>{
         module1_6();
     })
@@ -8,34 +7,16 @@ describe('Module 2-11: Thêm phiên bản hết hiệu lực cho quy trình ', (
         browser.closeWindow();
     })
 
-    //Thêm phiên bản hết hiệu lực cho quy trình
-    let fileRevisionInActiveURL = process.env.URL_QLTLHHL;
-    let btnAdd = '[title="Thêm mới phiên bản có hiệu lực"]';
-    let inputRevision = '[name="revisionNumber"]';
-    let inputNote =  '[name="note"]';
-    let btnSave = '[class="btn btn-primary"]';
+    //Nhân bản phiên bản hiện hành
+    let fileRevisionActiveURL = process.env.URL_QLTLHHL;
+    let btnCopy ='[data-testid="FolderCopyIcon"]';
   
-    it('Thêm phiên bản hết hiệu lực cho quy trình thành công', () =>{
+    it('Nhân bản phiên bản hiện hành thành công', () =>{
 
-        browser.url(fileRevisionInActiveURL);
-        $(btnAdd).click();
+        browser.url(fileRevisionActiveURL);
+        $(btnCopy).click();
 
-        //Nhập input lần soát xét
-        $(inputRevision).waitForDisplayed(5000);
-        $(inputRevision).setValue('2');
-        browser.pause(2000);
-
-        //Nhập input note 
-        $(inputNote).waitForDisplayed(5000);
-        $(inputNote).setValue('note hết hiệu lực test 1');
-        browser.pause(2000);
-
-        //Nhấn button save 
-        $(btnSave).waitForDisplayed(5000);
-        $(btnSave).click();
-        browser.pause(2000);
-
-       //Expect output: chắc chắn hiển thị thông báo thêm thành công 
+        //Expect output: chắc chắn hiển thị thông báo nhân bản thành công 
        let toast = '[class="Toastify__toast Toastify__toast-theme--light Toastify__toast--success"]';
        expect(toast).toBeDisplayed(true);
     })
